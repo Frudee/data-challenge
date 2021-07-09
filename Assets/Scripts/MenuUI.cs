@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class MenuUI : MonoBehaviour
 {
@@ -25,4 +28,21 @@ public class MenuUI : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+    public void Exit()
+    {
+        Debug.Log("exit");
+        // SaveManager.Instance.SaveName();
+
+#if UNITY_EDITOR
+        Debug.Log("exit");
+        EditorApplication.ExitPlaymode();
+        SaveManager.Instance.SaveNameAndScore();
+        Debug.Log("exit");
+#else
+
+        Application.Quit();
+        // SaveManager.Instance.SaveName();
+#endif
+    }
+
 }

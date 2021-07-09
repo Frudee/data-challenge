@@ -16,6 +16,7 @@ public class MainManager : MonoBehaviour
 
     private bool m_Started = false;
     private int m_Points;
+    public int highScore = 0;
 
     private bool m_GameOver = false;
 
@@ -38,10 +39,23 @@ public class MainManager : MonoBehaviour
             }
         }
 
+        Debug.Log(SaveManager.Instance.highScore + "mm hs");
         // Display player's name
-        if (SaveManager.Instance.input != null)
+        // if (SaveManager.Instance.input != null && SaveManager.Instance.highScoreName == null)
+        // {
+        //     Debug.Log(SaveManager.Instance.input);
+        //     // SaveManager.Instance.LoadName();
+        //     nameText.text = "Best Score : " + SaveManager.Instance.input + " : 0";
+        // }
+        if (SaveManager.Instance.highScoreName != null && SaveManager.Instance.highScoreName != "")
         {
-            nameText.text = SaveManager.Instance.input;
+            Debug.Log(SaveManager.Instance.highScoreName + "sad");
+            nameText.text = "Best Score : " + SaveManager.Instance.highScoreName + " : " + SaveManager.Instance.highScore;
+        }
+        else
+        {
+            Debug.Log(SaveManager.Instance.input);
+            nameText.text = "Best Score : " + SaveManager.Instance.input + " : 0";
         }
 
     }
@@ -73,6 +87,13 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
+        if (m_Points > SaveManager.Instance.highScore)
+        {
+            SaveManager.Instance.highScore = m_Points;
+            SaveManager.Instance.highScoreName = SaveManager.Instance.highScoreName = SaveManager.Instance.input;
+            SaveManager.Instance.SaveNameAndScore();
+            nameText.text = "Best Score : " + SaveManager.Instance.highScoreName + " : " + SaveManager.Instance.highScore;
+        }
         ScoreText.text = $"Score : {m_Points}";
     }
 
