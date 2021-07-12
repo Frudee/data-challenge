@@ -38,26 +38,7 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
-
-        Debug.Log(SaveManager.Instance.highScore + "mm hs");
-        // Display player's name
-        // if (SaveManager.Instance.input != null && SaveManager.Instance.highScoreName == null)
-        // {
-        //     Debug.Log(SaveManager.Instance.input);
-        //     // SaveManager.Instance.LoadName();
-        //     nameText.text = "Best Score : " + SaveManager.Instance.input + " : 0";
-        // }
-        if (SaveManager.Instance.highScoreName != null && SaveManager.Instance.highScoreName != "")
-        {
-            Debug.Log(SaveManager.Instance.highScoreName + "sad");
-            nameText.text = "Best Score : " + SaveManager.Instance.highScoreName + " : " + SaveManager.Instance.highScore;
-        }
-        else
-        {
-            Debug.Log(SaveManager.Instance.input);
-            nameText.text = "Best Score : " + SaveManager.Instance.input + " : 0";
-        }
-
+        DisplayPlayerName();
     }
 
     private void Update()
@@ -81,6 +62,19 @@ public class MainManager : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+        }
+    }
+
+    // Display player's name
+    private void DisplayPlayerName()
+    {
+        if (SaveManager.Instance.highScoreName != null && SaveManager.Instance.highScoreName != "")
+        {
+            nameText.text = "Best Score : " + SaveManager.Instance.highScoreName + " : " + SaveManager.Instance.highScore;
+        }
+        else
+        {
+            nameText.text = "Best Score : " + SaveManager.Instance.input + " : 0";
         }
     }
 

@@ -12,7 +12,7 @@ public class SaveManager : MonoBehaviour
     public string highScoreName;
     public int highScore;
     public TMP_InputField playerName;
-    // public bool firstStart = true;
+
     private void Awake()
     {
         if (Instance != null)
@@ -26,20 +26,16 @@ public class SaveManager : MonoBehaviour
         ShowPlayerName();
     }
 
+
     public void ShowPlayerName()
     {
         playerName.text = input;
-        // playerName = GetComponent<InputField>();
-        // playerName.text = input;
-        // playerName.value = input;
     }
 
+    // Get player name
     public void GetPlayerName(string s)
     {
         input = s;
-
-        // playerName = inputField.GetComponent<Text>().text;
-        Debug.Log(input);
     }
 
     [System.Serializable]
@@ -58,7 +54,6 @@ public class SaveManager : MonoBehaviour
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "savefile.json", json);
-        // firstStart = false;
     }
     public void SaveNameAndScore()
     {
@@ -66,10 +61,8 @@ public class SaveManager : MonoBehaviour
         data.highScoreName = highScoreName;
         data.input = input;
         data.highScore = highScore;
-        Debug.Log(highScoreName);
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "savefile1.json", json);
-        // firstStart = false;
     }
 
     public void LoadName()
@@ -83,7 +76,6 @@ public class SaveManager : MonoBehaviour
             input = data.input;
             highScore = data.highScore;
             highScoreName = data.highScoreName;
-            Debug.Log(highScore + " hs");
         }
     }
     public void LoadHighScoreName()
@@ -97,7 +89,6 @@ public class SaveManager : MonoBehaviour
 
             highScore = data.highScore;
             highScoreName = data.highScoreName;
-            Debug.Log(highScore + " hs");
         }
     }
 }
